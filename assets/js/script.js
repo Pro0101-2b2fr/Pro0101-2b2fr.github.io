@@ -148,7 +148,9 @@ function setupNavigation() {
 
     // Menu mobile
     if (navToggle && navMenu) {
-        navToggle.addEventListener('click', () => {
+        navToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             navMenu.classList.toggle('active');
         });
 
@@ -157,6 +159,20 @@ function setupNavigation() {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
+        });
+
+        // Fermer le menu au clic en dehors
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Fermer le menu au redimensionnement
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('active');
+            }
         });
     }
 
@@ -388,12 +404,20 @@ async function loadGitHubStats() {
     const username = 'Pro0101-2b2fr';
 
     try {
+        // Utiliser les headers pour éviter les limites d'API
+        const headers = {
+            'Accept': 'application/vnd.github.v3+json',
+            'User-Agent': 'Pro0101-Portfolio'
+        };
+
         // Récupérer les informations du profil
-        const userResponse = await fetch(`https://api.github.com/users/${username}`);
+        const userResponse = await fetch(`https://api.github.com/users/${username}`, { headers });
+        if (!userResponse.ok) throw new Error(`GitHub API Error: ${userResponse.status}`);
         const userData = await userResponse.json();
 
-        // Récupérer les repositories
-        const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+        // Récupérer les repositories avec pagination
+        const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`, { headers });
+        if (!reposResponse.ok) throw new Error(`GitHub Repos API Error: ${reposResponse.status}`);
         const reposData = await reposResponse.json();
 
         // Calculer les statistiques
@@ -409,7 +433,16 @@ async function loadGitHubStats() {
 
     } catch (error) {
         console.warn('⚠️ Impossible de charger les stats GitHub:', error);
-        // Créer des graphiques avec données par défaut
+        // Utiliser des données réalistes par défaut
+        const defaultStats = {
+            monthsLearning: 8, // Environ 8 mois depuis le début 2024
+            linesOfCode: 15,
+            projects: 12,
+            followers: 3,
+            following: 8,
+            javaRepos: 5
+        };
+        updateStatsDisplay(defaultStats);
         createDefaultCharts();
     }
 }
@@ -648,11 +681,11 @@ function createTimelineChart() {
     if (!ctx) return;
 
     const timelineData = {
-        labels: ['2024', 'Début 2025', 'Mi-2025', 'Fin 2025', 'Mi-2026', 'Fin 2026'],
+        labels: ['Début 2024', '2025 Actuel', 'Mi-2025', 'Fin 2025', 'Mi-2026', 'Fin 2026'],
         datasets: [
             {
                 label: 'Compétences Java (%)',
-                data: [35, 45, 60, 70, 80, 85],
+                data: [20, 40, 55, 70, 80, 90],
                 borderColor: '#00f5ff',
                 backgroundColor: 'rgba(0, 245, 255, 0.1)',
                 tension: 0.4,
@@ -660,7 +693,7 @@ function createTimelineChart() {
             },
             {
                 label: 'Projets Réalisés',
-                data: [8, 12, 18, 25, 35, 50],
+                data: [3, 12, 20, 30, 45, 60],
                 borderColor: '#ff6b35',
                 backgroundColor: 'rgba(255, 107, 53, 0.1)',
                 tension: 0.4,
@@ -668,7 +701,7 @@ function createTimelineChart() {
             },
             {
                 label: 'Expérience Pro (mois)',
-                data: [0, 0, 0, 3, 9, 15],
+                data: [0, 0, 3, 6, 12, 18],
                 borderColor: '#50fa7b',
                 backgroundColor: 'rgba(80, 250, 123, 0.1)',
                 tension: 0.4,
@@ -676,7 +709,7 @@ function createTimelineChart() {
             },
             {
                 label: 'Technologies Maîtrisées',
-                data: [3, 5, 8, 12, 18, 25],
+                data: [2, 5, 10, 15, 22, 30],
                 borderColor: '#ffd700',
                 backgroundColor: 'rgba(255, 215, 0, 0.1)',
                 tension: 0.4,

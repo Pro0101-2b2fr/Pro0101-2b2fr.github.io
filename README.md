@@ -5,11 +5,11 @@
 
 [![Java](https://img.shields.io/badge/Java-Débutant-orange?style=for-the-badge&logo=java)](https://github.com/Pro0101-2b2fr)
 [![Minecraft](https://img.shields.io/badge/Minecraft-Apprentissage-green?style=for-the-badge&logo=minecraft)](https://github.com/Pro0101-2b2fr)
-[![Apprentissage](https://img.shields.io/badge/Apprentissage-6%20mois-blue?style=for-the-badge)](https://github.com/Pro0101-2b2fr)
+[![Apprentissage](https://img.shields.io/badge/Apprentissage-1%20an-blue?style=for-the-badge)](https://github.com/Pro0101-2b2fr)
 
 ## 🎯 À Propos
 
-Bienvenue sur mon portfolio personnel ! Je suis **Pro0101-2b2fr**, un développeur débutant en apprentissage depuis 6 mois. Je me passionne pour la programmation Java et le développement de petits projets personnels.
+Bienvenue sur mon portfolio personnel ! Je suis **Pro0101-2b2fr**, un développeur débutant en apprentissage depuis 1 an. Je me passionne pour la programmation Java et le développement d'applications, avec pour objectif de décrocher mon premier stage en 2025.
 
 ### 🎮 Mon Projet Principal : **Pro Client**
 
