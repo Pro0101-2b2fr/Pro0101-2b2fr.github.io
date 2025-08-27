@@ -307,9 +307,7 @@ body {
 
 .contact-links {
   display: flex;
-  gap: 2rem;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
 .contact-btn {
