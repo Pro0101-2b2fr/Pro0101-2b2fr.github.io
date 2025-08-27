@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupCounters();
     loadGitHubStats();
     
-    // Masquer le loading screen
+    // Masquer le loading screen plus rapidement
     setTimeout(() => {
         const loadingScreen = document.getElementById('loading-screen');
         if (loadingScreen) {
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadingScreen.style.display = 'none';
             }, 500);
         }
-    }, 3000);
+    }, 1500);
 });
 
 // Initialisation de l'application
