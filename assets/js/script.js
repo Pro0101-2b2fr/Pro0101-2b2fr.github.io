@@ -492,14 +492,14 @@ async function fetchGitHubContributions(username) {
 // Fallback avec GitHub Readme Stats
 function loadGitHubReadmeStats() {
     const username = 'Pro0101-2b2fr';
-    
+
     // Utiliser les données réelles basées sur GitHub Readme Stats
     const currentStats = {
         monthsLearning: 12, // Mis à jour pour 2025
         linesOfCode: 25,    // Estimation réaliste
         projects: 15,       // Projets actuels
-        followers: userData?.followers || 5,
-        following: userData?.following || 12,
+        followers: 5, // Utiliser une valeur par défaut si userData n'est pas disponible
+        following: 12, // Utiliser une valeur par défaut si userData n'est pas disponible
         javaRepos: 6
     };
 
