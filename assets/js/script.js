@@ -1,37 +1,28 @@
 
-// Navigation mobile toggle
+// Animation et interactions modernes
 document.addEventListener('DOMContentLoaded', function() {
+  // Navigation mobile
   const navToggle = document.querySelector('.nav-toggle');
   const navMenu = document.querySelector('.nav-menu');
   const navLinks = document.querySelectorAll('.nav-link');
-  const loading = document.getElementById('loading');
 
-  // Hide loading screen
-  if (loading) {
-    setTimeout(() => {
-      loading.style.display = 'none';
-    }, 500);
-  }
-
-  // Mobile menu toggle
+  // Toggle mobile menu
   if (navToggle && navMenu) {
     navToggle.addEventListener('click', function() {
       navMenu.classList.toggle('active');
-      navToggle.setAttribute('aria-expanded', 
-        navToggle.getAttribute('aria-expanded') === 'false' ? 'true' : 'false'
-      );
+      navToggle.classList.toggle('active');
     });
 
     // Close menu when clicking on links
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('active');
-        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.classList.remove('active');
       });
     });
   }
 
-  // Smooth scrolling for navigation links
+  // Smooth scrolling
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
@@ -47,14 +38,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Active navigation highlighting
   function updateActiveNav() {
-    const sections = document.querySelectorAll('section[id], header[id]');
+    const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
     
     let current = '';
     sections.forEach(section => {
-      const sectionTop = section.offsetTop;
+      const sectionTop = section.offsetTop - 100;
       const sectionHeight = section.clientHeight;
-      if (window.pageYOffset >= sectionTop - 200) {
+      if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
         current = section.getAttribute('id');
       }
     });
@@ -67,12 +58,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Throttled scroll event for performance
+  // Navbar scroll effect
+  function updateNavbar() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+      navbar.style.background = 'rgba(10, 10, 15, 0.98)';
+      navbar.style.borderBottom = '1px solid rgba(59, 130, 246, 0.3)';
+    } else {
+      navbar.style.background = 'rgba(10, 10, 15, 0.95)';
+      navbar.style.borderBottom = '1px solid var(--border-color)';
+    }
+  }
+
+  // Throttled scroll event
   let ticking = false;
   function handleScroll() {
     if (!ticking) {
       requestAnimationFrame(() => {
         updateActiveNav();
+        updateNavbar();
         ticking = false;
       });
       ticking = true;
@@ -90,21 +94,204 @@ document.addEventListener('DOMContentLoaded', function() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
+        entry.target.classList.add('visible');
+        
+        // Special handling for skill bars
+        if (entry.target.classList.contains('skill-progress')) {
+          const width = entry.target.dataset.width;
+          entry.target.style.setProperty('--width', width);
+        }
       }
     });
   }, observerOptions);
 
   // Observe elements for animation
-  document.querySelectorAll('.project-card, .skill-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  document.querySelectorAll('.project-card, .skill-category, .about-text, .contact-info, .tech-item').forEach(el => {
+    el.classList.add('fade-in');
     observer.observe(el);
   });
 
-  // Focus management for accessibility
+  // Observe skill bars
+  document.querySelectorAll('.skill-progress').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Typing animation for hero code
+  function typeCode() {
+    const codeElement = document.querySelector('.typing-animation .code-text');
+    if (codeElement) {
+      const text = codeElement.textContent;
+      codeElement.textContent = '';
+      codeElement.style.borderRight = '2px solid var(--primary-color)';
+      
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          codeElement.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, 50);
+        } else {
+          // Blinking cursor effect
+          setInterval(() => {
+            codeElement.style.borderRight = codeElement.style.borderRight === 'none' 
+              ? '2px solid var(--primary-color)' 
+              : 'none';
+          }, 500);
+        }
+      }
+      
+      setTimeout(type, 1000);
+    }
+  }
+
+  // Start typing animation after page load
+  setTimeout(typeCode, 2000);
+
+  // Floating shapes animation enhancement
+  function enhanceFloatingShapes() {
+    const shapes = document.querySelectorAll('.shape');
+    shapes.forEach((shape, index) => {
+      const speed = 20 + (index * 5);
+      const delay = -(index * 4);
+      shape.style.animationDuration = `${speed}s`;
+      shape.style.animationDelay = `${delay}s`;
+      
+      // Add mouse interaction
+      shape.addEventListener('mouseenter', () => {
+        shape.style.animationPlayState = 'paused';
+        shape.style.transform = 'scale(1.2)';
+      });
+      
+      shape.addEventListener('mouseleave', () => {
+        shape.style.animationPlayState = 'running';
+        shape.style.transform = 'scale(1)';
+      });
+    });
+  }
+
+  enhanceFloatingShapes();
+
+  // Particle effect for buttons
+  function createParticleEffect(button) {
+    button.addEventListener('click', function(e) {
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      for (let i = 0; i < 6; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.width = '4px';
+        particle.style.height = '4px';
+        particle.style.background = 'var(--primary-color)';
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '1000';
+        
+        button.style.position = 'relative';
+        button.appendChild(particle);
+        
+        const angle = (Math.PI * 2 * i) / 6;
+        const velocity = 50;
+        const vx = Math.cos(angle) * velocity;
+        const vy = Math.sin(angle) * velocity;
+        
+        let particleX = x;
+        let particleY = y;
+        let opacity = 1;
+        
+        function animateParticle() {
+          particleX += vx * 0.02;
+          particleY += vy * 0.02;
+          opacity -= 0.02;
+          
+          particle.style.left = particleX + 'px';
+          particle.style.top = particleY + 'px';
+          particle.style.opacity = opacity;
+          
+          if (opacity > 0) {
+            requestAnimationFrame(animateParticle);
+          } else {
+            particle.remove();
+          }
+        }
+        
+        requestAnimationFrame(animateParticle);
+      }
+    });
+  }
+
+  // Apply particle effect to buttons
+  document.querySelectorAll('.btn-primary').forEach(createParticleEffect);
+
+  // Parallax effect for hero section
+  function parallaxEffect() {
+    const hero = document.querySelector('.hero');
+    const scrolled = window.pageYOffset;
+    const rate = scrolled * -0.5;
+    
+    if (hero) {
+      hero.style.transform = `translateY(${rate}px)`;
+    }
+  }
+
+  window.addEventListener('scroll', parallaxEffect);
+
+  // Dark mode toggle (future enhancement)
+  function initThemeToggle() {
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+        localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+      });
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-theme');
+    }
+  }
+
+  initThemeToggle();
+
+  // Performance monitoring
+  if ('performance' in window) {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const perfData = performance.getEntriesByType('navigation')[0];
+        if (perfData) {
+          console.log('Page load time:', Math.round(perfData.loadEventEnd - perfData.loadEventStart), 'ms');
+        }
+      }, 0);
+    });
+  }
+
+  // Preload critical images
+  function preloadImages() {
+    const imageUrls = [
+      // Add any critical image URLs here
+    ];
+    
+    imageUrls.forEach(url => {
+      const img = new Image();
+      img.src = url;
+    });
+  }
+
+  preloadImages();
+
+  // Error handling for external resources
+  window.addEventListener('error', (e) => {
+    if (e.target.tagName === 'LINK' || e.target.tagName === 'SCRIPT') {
+      console.warn('Failed to load resource:', e.target.src || e.target.href);
+    }
+  });
+
+  // Accessibility improvements
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Tab') {
       document.body.classList.add('keyboard-navigation');
@@ -115,37 +302,15 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.remove('keyboard-navigation');
   });
 
-  // Prefers reduced motion
+  // Reduced motion support
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (prefersReducedMotion.matches) {
-    document.querySelectorAll('*').forEach(el => {
-      el.style.animationDuration = '0.01ms !important';
-      el.style.animationIterationCount = '1 !important';
-      el.style.transitionDuration = '0.01ms !important';
-    });
+    document.documentElement.style.setProperty('--animation-duration', '0.01ms');
+    document.documentElement.style.setProperty('--transition-duration', '0.01ms');
   }
 
-  // Form validation (if contact form is added later)
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
-
-  // Performance monitoring
-  if ('performance' in window) {
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const perfData = performance.getEntriesByType('navigation')[0];
-        console.log('Page load time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
-      }, 0);
-    });
-  }
-
-  // Service Worker registration (future enhancement)
-  if ('serviceWorker' in navigator) {
-    // Uncomment when service worker is implemented
-    // navigator.serviceWorker.register('/sw.js');
-  }
+  // Initialize everything
+  console.log('🚀 Portfolio initialized successfully!');
 });
 
 // Utility functions
@@ -177,6 +342,10 @@ const utils = {
         setTimeout(() => inThrottle = false, limit);
       }
     };
+  },
+
+  randomBetween: function(min, max) {
+    return Math.random() * (max - min) + min;
   }
 };
 
