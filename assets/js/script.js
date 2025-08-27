@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
     setupSkillBars();
     setupCounters();
+    loadGitHubStats();
     
     // Masquer le loading screen
     setTimeout(() => {
@@ -381,6 +382,86 @@ window.addEventListener('beforeunload', () => {
         cancelAnimationFrame(animationId);
     }
 });
+
+// Récupération des statistiques GitHub réelles
+async function loadGitHubStats() {
+    const username = 'Pro0101-2b2fr';
+    
+    try {
+        // Récupérer les informations du profil
+        const userResponse = await fetch(`https://api.github.com/users/${username}`);
+        const userData = await userResponse.json();
+        
+        // Récupérer les repositories
+        const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+        const reposData = await reposResponse.json();
+        
+        // Calculer les statistiques
+        const stats = calculateGitHubStats(userData, reposData);
+        
+        // Mettre à jour l'affichage
+        updateStatsDisplay(stats);
+        
+        console.log('📊 Statistiques GitHub chargées:', stats);
+        
+    } catch (error) {
+        console.warn('⚠️ Impossible de charger les stats GitHub:', error);
+        // Garder les valeurs par défaut si l'API échoue
+    }
+}
+
+function calculateGitHubStats(userData, reposData) {
+    // Calculer le total de lignes de code (estimation basée sur les langages)
+    let totalLines = 0;
+    let javaRepos = 0;
+    
+    reposData.forEach(repo => {
+        // Estimation approximative des lignes de code par repo
+        if (repo.size > 0) {
+            totalLines += repo.size * 10; // Approximation: 1KB = ~10 lignes
+        }
+        
+        // Compter les repos Java
+        if (repo.language === 'Java') {
+            javaRepos++;
+        }
+    });
+    
+    // Calculer les mois depuis la création du compte
+    const accountCreated = new Date(userData.created_at);
+    const now = new Date();
+    const monthsSinceCreation = Math.floor((now - accountCreated) / (1000 * 60 * 60 * 24 * 30));
+    
+    return {
+        monthsLearning: Math.max(6, monthsSinceCreation), // Minimum 6 mois comme indiqué
+        linesOfCode: Math.floor(totalLines / 1000), // En milliers
+        projects: userData.public_repos,
+        followers: userData.followers,
+        following: userData.following,
+        javaRepos: javaRepos
+    };
+}
+
+function updateStatsDisplay(stats) {
+    // Mettre à jour les compteurs avec les vraies données
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    if (statNumbers.length >= 3) {
+        // Mois d'apprentissage
+        statNumbers[0].setAttribute('data-target', stats.monthsLearning);
+        
+        // Lignes de code (en K)
+        statNumbers[1].setAttribute('data-target', Math.max(10, stats.linesOfCode));
+        
+        // Nombre de projets
+        statNumbers[2].setAttribute('data-target', Math.max(8, stats.projects));
+    }
+    
+    // Redéclencher l'animation des compteurs
+    setTimeout(() => {
+        setupCounters();
+    }, 1000);
+}
 
 // Initialisation des performances
 monitorPerformance();
