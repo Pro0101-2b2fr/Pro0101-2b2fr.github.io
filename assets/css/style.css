@@ -12,6 +12,8 @@
   --border: #333333;
   --glow: rgba(0, 245, 255, 0.5);
   --gradient: linear-gradient(135deg, #00f5ff 0%, #ff6b35 100%);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-elevation: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Reset */
@@ -570,9 +572,10 @@ body {
 }
 
 .about-card:hover {
-  transform: translateY(-5px);
+  transform: translate3d(0, -5px, 0);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   border-color: var(--primary);
+  will-change: transform;
 }
 
 .about-card.featured {
@@ -861,6 +864,83 @@ body {
 @keyframes shine {
   0% { transform: translateX(-20px); }
   100% { transform: translateX(20px); }
+}
+
+/* Analytics Section */
+.analytics {
+  background: var(--bg-darker);
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.chart-card {
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary);
+}
+
+.chart-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.chart-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.chart-header h3 {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.chart-header p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.chart-container {
+  position: relative;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.chart-card.full-width .chart-container {
+  height: 400px;
+}
+
+/* Responsive pour Analytics */
+@media (max-width: 768px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .chart-card {
+    padding: 1.5rem;
+  }
+  
+  .chart-container {
+    height: 250px;
+  }
+  
+  .chart-card.full-width .chart-container {
+    height: 300px;
+  }
 }
 
 /* Contact Section */

@@ -57,8 +57,9 @@ function createParticles() {
     
     particlesContainer.appendChild(canvas);
     
-    // Créer les particules
-    const particleCount = Math.min(50, Math.floor(window.innerWidth / 20));
+    // Créer les particules (réduit pour mobile)
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 20 : Math.min(50, Math.floor(window.innerWidth / 20));
     
     for (let i = 0; i < particleCount; i++) {
         particlesArray.push({
@@ -402,11 +403,15 @@ async function loadGitHubStats() {
         // Mettre à jour l'affichage
         updateStatsDisplay(stats);
         
+        // Créer les graphiques
+        createCharts(stats, reposData);
+        
         console.log('📊 Statistiques GitHub chargées:', stats);
         
     } catch (error) {
         console.warn('⚠️ Impossible de charger les stats GitHub:', error);
-        // Garder les valeurs par défaut si l'API échoue
+        // Créer des graphiques avec données par défaut
+        createDefaultCharts();
     }
 }
 
@@ -461,6 +466,274 @@ function updateStatsDisplay(stats) {
     setTimeout(() => {
         setupCounters();
     }, 1000);
+}
+
+// Création des graphiques
+function createCharts(stats, reposData) {
+    createSkillsChart();
+    createActivityChart(stats);
+    createProjectsChart(reposData);
+    createTimelineChart();
+}
+
+function createDefaultCharts() {
+    createSkillsChart();
+    createActivityChart({
+        monthsLearning: 6,
+        linesOfCode: 10,
+        projects: 8,
+        followers: 5,
+        following: 10,
+        javaRepos: 3
+    });
+    createProjectsChart([]);
+    createTimelineChart();
+}
+
+function createSkillsChart() {
+    const ctx = document.getElementById('skillsChart');
+    if (!ctx) return;
+    
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Java', 'HTML/CSS', 'JavaScript', 'Git', 'Debugging'],
+            datasets: [{
+                data: [35, 60, 25, 40, 20],
+                backgroundColor: [
+                    '#00f5ff',
+                    '#ff6b35',
+                    '#ffd700',
+                    '#50fa7b',
+                    '#ff79c6'
+                ],
+                borderWidth: 2,
+                borderColor: '#1a1a1a'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#ffffff',
+                        padding: 20,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function createActivityChart(stats) {
+    const ctx = document.getElementById('activityChart');
+    if (!ctx) return;
+    
+    // Données simulées d'activité
+    const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'];
+    const commits = [0, 5, 12, 18, 25, 35];
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Commits',
+                data: commits,
+                borderColor: '#00f5ff',
+                backgroundColor: 'rgba(0, 245, 255, 0.1)',
+                tension: 0.4,
+                fill: true,
+                pointBackgroundColor: '#00f5ff',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2,
+                pointRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#a0a0a0'
+                    },
+                    grid: {
+                        color: '#333333'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#a0a0a0'
+                    },
+                    grid: {
+                        color: '#333333'
+                    }
+                }
+            }
+        }
+    });
+}
+
+function createProjectsChart(reposData) {
+    const ctx = document.getElementById('projectsChart');
+    if (!ctx) return;
+    
+    // Analyser les langages des repos ou utiliser des données par défaut
+    const languages = reposData.length > 0 
+        ? analyzeLanguages(reposData) 
+        : { Java: 3, HTML: 2, JavaScript: 2, Autres: 1 };
+    
+    new Chart(ctx, {
+        type: 'polarArea',
+        data: {
+            labels: Object.keys(languages),
+            datasets: [{
+                data: Object.values(languages),
+                backgroundColor: [
+                    'rgba(0, 245, 255, 0.8)',
+                    'rgba(255, 107, 53, 0.8)',
+                    'rgba(255, 215, 0, 0.8)',
+                    'rgba(80, 250, 123, 0.8)'
+                ],
+                borderColor: [
+                    '#00f5ff',
+                    '#ff6b35',
+                    '#ffd700',
+                    '#50fa7b'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#ffffff',
+                        padding: 15
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    ticks: {
+                        color: '#a0a0a0',
+                        backdropColor: 'transparent'
+                    },
+                    grid: {
+                        color: '#333333'
+                    }
+                }
+            }
+        }
+    });
+}
+
+function createTimelineChart() {
+    const ctx = document.getElementById('timelineChart');
+    if (!ctx) return;
+    
+    const timelineData = {
+        labels: ['Mois 1', 'Mois 2', 'Mois 3', 'Mois 4', 'Mois 5', 'Mois 6'],
+        datasets: [
+            {
+                label: 'Compétences Java',
+                data: [5, 15, 25, 30, 35, 35],
+                borderColor: '#00f5ff',
+                backgroundColor: 'rgba(0, 245, 255, 0.1)',
+                tension: 0.4,
+                fill: false
+            },
+            {
+                label: 'Projets Réalisés',
+                data: [0, 1, 3, 5, 7, 8],
+                borderColor: '#ff6b35',
+                backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                tension: 0.4,
+                fill: false
+            },
+            {
+                label: 'Lignes de Code (K)',
+                data: [0, 2, 5, 8, 10, 12],
+                borderColor: '#ffd700',
+                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                tension: 0.4,
+                fill: false
+            }
+        ]
+    };
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: timelineData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: '#ffffff',
+                        padding: 20,
+                        usePointStyle: true
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#a0a0a0'
+                    },
+                    grid: {
+                        color: '#333333'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#a0a0a0'
+                    },
+                    grid: {
+                        color: '#333333'
+                    }
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            }
+        }
+    });
+}
+
+function analyzeLanguages(reposData) {
+    const languages = {};
+    reposData.forEach(repo => {
+        if (repo.language) {
+            languages[repo.language] = (languages[repo.language] || 0) + 1;
+        }
+    });
+    
+    // Limiter aux 4 langages les plus utilisés
+    const sortedLanguages = Object.entries(languages)
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 4);
+    
+    return Object.fromEntries(sortedLanguages);
 }
 
 // Initialisation des performances
