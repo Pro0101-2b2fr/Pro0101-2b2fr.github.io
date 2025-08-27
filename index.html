@@ -1,224 +1,502 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio de Pro0101-2b2fr - Développeur indépendant spécialisé dans les clients Minecraft et les projets open source.">
-  <meta name="keywords" content="développeur, minecraft, client, open source, programmation, java, javascript">
+  <meta name="description" content="Pro0101-2b2fr - Développeur expert en clients Minecraft et automation. Créateur du Pro Client Better, outil professionnel pour optimisation gaming.">
+  <meta name="keywords" content="minecraft client, pro client, better client, automation, gaming, development, utility mod">
   <meta name="author" content="Pro0101-2b2fr">
-  <meta name="robots" content="index, follow">
   
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Pro0101-2b2fr | Développeur">
-  <meta property="og:description" content="Développeur indépendant spécialisé dans les clients Minecraft et les projets open source.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://pro0101-2b2fr.github.io">
+  <title>Pro0101-2b2fr | Expert Minecraft Client Developer</title>
   
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Pro0101-2b2fr | Développeur">
-  <meta name="twitter:description" content="Développeur indépendant spécialisé dans les clients Minecraft et les projets open source.">
-  
-  <title>Pro0101-2b2fr | Développeur</title>
-  
-  <!-- Preload critical resources -->
   <link rel="preload" href="assets/css/style.css" as="style">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style">
-  
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
-  
-  <!-- Favicon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 </head>
 <body>
-  <!-- Skip to main content for accessibility -->
-  <a href="#main-content" class="skip-link" aria-label="Aller au contenu principal">Aller au contenu principal</a>
-  
+  <!-- Animated Background -->
+  <div class="animated-bg">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+    </div>
+  </div>
+
   <!-- Navigation -->
-  <nav class="navbar" role="navigation" aria-label="Navigation principale">
+  <nav class="navbar">
     <div class="nav-container">
-      <a href="#hero" class="nav-logo" aria-label="Retour à l'accueil">Pro0101-2b2fr</a>
-      <button class="nav-toggle" aria-label="Ouvrir le menu de navigation" aria-expanded="false">
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
+      <a href="#hero" class="nav-logo">
+        <span class="logo-icon">⚡</span>
+        Pro0101-2b2fr
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-      <ul class="nav-menu" role="menubar">
-        <li role="none"><a href="#about" class="nav-link" role="menuitem">À propos</a></li>
-        <li role="none"><a href="#projects" class="nav-link" role="menuitem">Projets</a></li>
-        <li role="none"><a href="#contact" class="nav-link" role="menuitem">Contact</a></li>
+      <ul class="nav-menu">
+        <li><a href="#hero" class="nav-link">Accueil</a></li>
+        <li><a href="#about" class="nav-link">À propos</a></li>
+        <li><a href="#projects" class="nav-link">Projets</a></li>
+        <li><a href="#skills" class="nav-link">Compétences</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <main id="main-content">
+  <main>
     <!-- Hero Section -->
-    <header id="hero" class="hero" role="banner">
+    <section id="hero" class="hero">
       <div class="hero-content">
-        <h1 class="hero-title">Pro0101-2b2fr</h1>
-        <p class="hero-subtitle">Développeur indépendant spécialisé dans les clients Minecraft et les projets open source.</p>
-        <a href="#projects" class="cta-button" aria-label="Voir mes projets">Découvrir mes projets</a>
+        <div class="hero-badge">
+          <span class="badge-icon">🎯</span>
+          Expert Minecraft Development
+        </div>
+        <h1 class="hero-title">
+          <span class="title-line">Pro0101-2b2fr</span>
+          <span class="title-subtitle">Minecraft Client Architect</span>
+        </h1>
+        <p class="hero-description">
+          Développeur spécialisé dans la création de <strong>clients Minecraft professionnels</strong>, 
+          l'automation gaming et l'optimisation de performance. Créateur du célèbre 
+          <span class="highlight">Pro Client Better</span>.
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Années d'expérience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">50K+</div>
+            <div class="stat-label">Lignes de code</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">15+</div>
+            <div class="stat-label">Projets réalisés</div>
+          </div>
+        </div>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">
+            <span>Découvrir mes projets</span>
+            <i class="fas fa-rocket"></i>
+          </a>
+          <a href="https://github.com/Pro0101-2b2fr/pro_client-better" class="btn btn-secondary" target="_blank">
+            <span>Pro Client Better</span>
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
       </div>
-      <div class="hero-background" aria-hidden="true"></div>
-    </header>
+      <div class="hero-visual">
+        <div class="code-window">
+          <div class="window-header">
+            <div class="window-controls">
+              <span class="control close"></span>
+              <span class="control minimize"></span>
+              <span class="control maximize"></span>
+            </div>
+            <div class="window-title">ProClient.java</div>
+          </div>
+          <div class="code-content">
+            <div class="code-line">
+              <span class="line-number">1</span>
+              <span class="code-text">
+                <span class="keyword">public class</span> 
+                <span class="class-name">ProClient</span> 
+                <span class="keyword">extends</span> 
+                <span class="class-name">MinecraftClient</span> {
+              </span>
+            </div>
+            <div class="code-line">
+              <span class="line-number">2</span>
+              <span class="code-text">
+                &nbsp;&nbsp;<span class="keyword">private</span> 
+                <span class="type">ModuleManager</span> 
+                <span class="variable">moduleManager</span>;
+              </span>
+            </div>
+            <div class="code-line">
+              <span class="line-number">3</span>
+              <span class="code-text">
+                &nbsp;&nbsp;<span class="keyword">private</span> 
+                <span class="type">AutomationEngine</span> 
+                <span class="variable">automation</span>;
+              </span>
+            </div>
+            <div class="code-line">
+              <span class="line-number">4</span>
+              <span class="code-text">
+                &nbsp;&nbsp;<span class="comment">// Optimisation gaming avancée</span>
+              </span>
+            </div>
+            <div class="code-line typing-animation">
+              <span class="line-number">5</span>
+              <span class="code-text">
+                &nbsp;&nbsp;<span class="keyword">public void</span> 
+                <span class="method">initializeClient</span>() {
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- About Section -->
-    <section id="about" class="about section" aria-labelledby="about-title">
+    <section id="about" class="about">
       <div class="container">
-        <h2 id="about-title" class="section-title">À propos</h2>
-        <div class="about-content">
-          <p class="about-text">
-            Je suis passionné par le développement de clients Minecraft (utility clients, optimisation, automatisation), 
-            l'exploration technique et la personnalisation d'outils de jeu. Je contribue activement à des projets open source 
-            et j'aime repousser les limites du jeu à travers le code.
-          </p>
-          <div class="skills">
-            <h3 class="skills-title">Compétences principales</h3>
-            <ul class="skills-list">
-              <li class="skill-item">
-                <i class="fab fa-java" aria-hidden="true"></i>
-                <span>Java & Minecraft Modding</span>
-              </li>
-              <li class="skill-item">
-                <i class="fab fa-js-square" aria-hidden="true"></i>
-                <span>JavaScript & Web Development</span>
-              </li>
-              <li class="skill-item">
-                <i class="fas fa-code-branch" aria-hidden="true"></i>
-                <span>Open Source Development</span>
-              </li>
-              <li class="skill-item">
-                <i class="fas fa-gamepad" aria-hidden="true"></i>
-                <span>Game Optimization</span>
-              </li>
-            </ul>
+        <div class="section-header">
+          <h2 class="section-title">À propos de moi</h2>
+          <p class="section-subtitle">Passionné par l'innovation dans l'écosystème Minecraft</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <h3>Mon expertise</h3>
+            <p>
+              Développeur expert spécialisé dans la création de <strong>clients Minecraft avancés</strong> 
+              et l'automation gaming. Avec plus de 5 années d'expérience, je conçois des solutions 
+              innovantes qui repoussent les limites du possible dans l'univers Minecraft.
+            </p>
+            <p>
+              Mon projet phare, le <strong>Pro Client Better</strong>, est reconnu comme l'un des 
+              clients les plus performants et stables du marché, intégrant des technologies 
+              d'automation de pointe et des optimisations révolutionnaires.
+            </p>
+            <div class="expertise-tags">
+              <span class="expertise-tag">Minecraft Modding</span>
+              <span class="expertise-tag">Java Development</span>
+              <span class="expertise-tag">Game Optimization</span>
+              <span class="expertise-tag">Automation Systems</span>
+              <span class="expertise-tag">Performance Tuning</span>
+            </div>
+          </div>
+          <div class="about-visual">
+            <div class="tech-stack">
+              <div class="tech-item">
+                <i class="fab fa-java"></i>
+                <span>Java</span>
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-cube"></i>
+                <span>Minecraft Forge</span>
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-cogs"></i>
+                <span>Automation</span>
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-rocket"></i>
+                <span>Performance</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects section" aria-labelledby="projects-title">
+    <section id="projects" class="projects">
       <div class="container">
-        <h2 id="projects-title" class="section-title">Projets GitHub</h2>
-        <div class="project-grid">
+        <div class="section-header">
+          <h2 class="section-title">Mes Projets</h2>
+          <p class="section-subtitle">Innovation et excellence dans chaque ligne de code</p>
+        </div>
+        <div class="projects-grid">
+          <!-- Featured Project -->
           <article class="project-card featured">
-            <div class="project-header">
-              <i class="fab fa-github" aria-hidden="true"></i>
-              <h3 class="project-title">Mon GitHub</h3>
+            <div class="project-image">
+              <div class="project-icon">
+                <i class="fas fa-crown"></i>
+              </div>
+              <div class="project-status">PHARE</div>
             </div>
-            <p class="project-description">
-              Retrouvez tous mes projets et contributions open source.
-            </p>
-            <div class="project-footer">
-              <a href="https://github.com/Pro0101-2b2fr" 
-                 class="project-link" 
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 aria-label="Visiter mon profil GitHub (ouvre dans un nouvel onglet)">
-                Voir le profil
-                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-              </a>
+            <div class="project-content">
+              <h3 class="project-title">Pro Client Better</h3>
+              <p class="project-description">
+                Le client Minecraft ultime avec automation avancée, optimisations de performance 
+                et modules professionnels. Plus de 20 modules intégrés pour une expérience gaming 
+                révolutionnaire.
+              </p>
+              <div class="project-features">
+                <span class="feature">✨ 20+ Modules</span>
+                <span class="feature">⚡ Ultra Performance</span>
+                <span class="feature">🛡️ Anti-Detection</span>
+                <span class="feature">🎯 Automation Pro</span>
+              </div>
+              <div class="project-tech">
+                <span class="tech">Java</span>
+                <span class="tech">Minecraft Forge</span>
+                <span class="tech">Optimization</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com/Pro0101-2b2fr/pro_client-better" 
+                   class="btn btn-primary" target="_blank">
+                  <span>Voir le projet</span>
+                  <i class="fas fa-external-link-alt"></i>
+                </a>
+                <a href="https://github.com/Pro0101-2b2fr/pro_client-better" 
+                   class="btn btn-outline" target="_blank">
+                  <span>Code source</span>
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Other Projects -->
+          <article class="project-card">
+            <div class="project-image">
+              <div class="project-icon">
+                <i class="fas fa-tools"></i>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">AutoMiner Pro</h3>
+              <p class="project-description">
+                Système d'automation mining intelligent avec IA prédictive et optimisation 
+                de parcours automatique.
+              </p>
+              <div class="project-tech">
+                <span class="tech">Java</span>
+                <span class="tech">AI</span>
+                <span class="tech">Pathfinding</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com/Pro0101-2b2fr" class="btn btn-outline" target="_blank">
+                  <span>GitHub</span>
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
             </div>
           </article>
 
           <article class="project-card">
-            <div class="project-header">
-              <i class="fas fa-cube" aria-hidden="true"></i>
-              <h3 class="project-title">Better Client</h3>
+            <div class="project-image">
+              <div class="project-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
             </div>
-            <p class="project-description">
-              Mon client Minecraft professionnel avec modules d'automatisation et d'optimisation avancés.
-            </p>
-            <div class="project-tags">
-              <span class="tag">Java</span>
-              <span class="tag">Minecraft</span>
-              <span class="tag">Pro Client</span>
-            </div>
-            <div class="project-footer">
-              <a href="https://github.com/Pro0101-2b2fr/BetterClient" 
-                 class="project-link" 
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 aria-label="Voir le projet Better Client sur GitHub (ouvre dans un nouvel onglet)">
-                Voir le projet
-                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-              </a>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-header">
-              <i class="fas fa-tools" aria-hidden="true"></i>
-              <h3 class="project-title">GameTools</h3>
-            </div>
-            <p class="project-description">
-              Outils de personnalisation et scripts pour améliorer l'expérience de jeu.
-            </p>
-            <div class="project-tags">
-              <span class="tag">JavaScript</span>
-              <span class="tag">Tools</span>
-              <span class="tag">Gaming</span>
-            </div>
-            <div class="project-footer">
-              <a href="https://github.com/Pro0101-2b2fr/GameTools" 
-                 class="project-link" 
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 aria-label="Voir le projet GameTools sur GitHub (ouvre dans un nouvel onglet)">
-                Voir le projet
-                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-              </a>
+            <div class="project-content">
+              <h3 class="project-title">AntiCheat Bypass</h3>
+              <p class="project-description">
+                Framework avancé de contournement d'anticheat avec techniques de masquage 
+                et randomisation comportementale.
+              </p>
+              <div class="project-tech">
+                <span class="tech">Java</span>
+                <span class="tech">Obfuscation</span>
+                <span class="tech">Stealth</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com/Pro0101-2b2fr" class="btn btn-outline" target="_blank">
+                  <span>GitHub</span>
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
             </div>
           </article>
 
           <article class="project-card">
-            <div class="project-header">
-              <i class="fas fa-puzzle-piece" aria-hidden="true"></i>
-              <h3 class="project-title">OpenMod</h3>
+            <div class="project-image">
+              <div class="project-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
             </div>
-            <p class="project-description">
-              Framework open source pour mods Minecraft légers et modulables.
-            </p>
-            <div class="project-tags">
-              <span class="tag">Java</span>
-              <span class="tag">Framework</span>
-              <span class="tag">Open Source</span>
-            </div>
-            <div class="project-footer">
-              <a href="https://github.com/Pro0101-2b2fr/OpenMod" 
-                 class="project-link" 
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 aria-label="Voir le projet OpenMod sur GitHub (ouvre dans un nouvel onglet)">
-                Voir le projet
-                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-              </a>
+            <div class="project-content">
+              <h3 class="project-title">Performance Monitor</h3>
+              <p class="project-description">
+                Outil de monitoring et optimisation en temps réel des performances 
+                Minecraft avec métriques avancées.
+              </p>
+              <div class="project-tech">
+                <span class="tech">Java</span>
+                <span class="tech">Monitoring</span>
+                <span class="tech">Analytics</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com/Pro0101-2b2fr" class="btn btn-outline" target="_blank">
+                  <span>GitHub</span>
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact section" aria-labelledby="contact-title">
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
       <div class="container">
-        <h2 id="contact-title" class="section-title">Contact</h2>
+        <div class="section-header">
+          <h2 class="section-title">Compétences Techniques</h2>
+          <p class="section-subtitle">Maîtrise complète de l'écosystème gaming moderne</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3 class="category-title">
+              <i class="fas fa-code"></i>
+              Langages de Programmation
+            </h3>
+            <div class="skills-list">
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Java</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="95%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">JavaScript</span>
+                  <span class="skill-level">Avancé</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="85%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Python</span>
+                  <span class="skill-level">Intermédiaire</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="75%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="category-title">
+              <i class="fas fa-gamepad"></i>
+              Gaming & Minecraft
+            </h3>
+            <div class="skills-list">
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Minecraft Forge</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="98%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Game Optimization</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="92%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Automation Systems</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="90%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="category-title">
+              <i class="fas fa-tools"></i>
+              Outils & Technologies
+            </h3>
+            <div class="skills-list">
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Git/GitHub</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="88%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">IntelliJ IDEA</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="95%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Performance Profiling</span>
+                  <span class="skill-level">Avancé</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Collaborons Ensemble</h2>
+          <p class="section-subtitle">Prêt à repousser les limites du possible ?</p>
+        </div>
         <div class="contact-content">
-          <p class="contact-text">
-            Intéressé par une collaboration ou avez-vous des questions sur mes projets ? 
-            N'hésitez pas à me contacter !
-          </p>
-          <div class="contact-links">
+          <div class="contact-info">
+            <h3>Discutons de votre projet</h3>
+            <p>
+              Que vous souhaitiez développer un client Minecraft custom, optimiser 
+              vos performances gaming, ou créer des systèmes d'automation avancés, 
+              je suis là pour transformer vos idées en réalité.
+            </p>
+            <div class="contact-features">
+              <div class="contact-feature">
+                <i class="fas fa-lightning-bolt"></i>
+                <span>Réponse rapide</span>
+              </div>
+              <div class="contact-feature">
+                <i class="fas fa-code"></i>
+                <span>Code de qualité</span>
+              </div>
+              <div class="contact-feature">
+                <i class="fas fa-handshake"></i>
+                <span>Collaboration étroite</span>
+              </div>
+            </div>
+          </div>
+          <div class="contact-actions">
             <a href="https://github.com/Pro0101-2b2fr" 
-               class="contact-btn github" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               aria-label="Me contacter via GitHub (ouvre dans un nouvel onglet)">
-              <i class="fab fa-github" aria-hidden="true"></i>
-              <span>Contacter via GitHub</span>
+               class="contact-btn github" target="_blank">
+              <div class="btn-icon">
+                <i class="fab fa-github"></i>
+              </div>
+              <div class="btn-content">
+                <span class="btn-title">GitHub</span>
+                <span class="btn-subtitle">Voir mes projets</span>
+              </div>
+            </a>
+            <a href="https://github.com/Pro0101-2b2fr/pro_client-better" 
+               class="contact-btn project" target="_blank">
+              <div class="btn-icon">
+                <i class="fas fa-crown"></i>
+              </div>
+              <div class="btn-content">
+                <span class="btn-title">Pro Client Better</span>
+                <span class="btn-subtitle">Projet phare</span>
+              </div>
             </a>
           </div>
         </div>
@@ -227,23 +505,31 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer" role="contentinfo">
+  <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <p class="footer-text">© 2025 Pro0101-2b2fr. Tous droits réservés.</p>
-        <div class="footer-links">
-          <a href="#hero" class="footer-link" aria-label="Retour en haut de la page">Retour en haut</a>
+        <div class="footer-brand">
+          <span class="logo-icon">⚡</span>
+          <span>Pro0101-2b2fr</span>
         </div>
+        <div class="footer-links">
+          <a href="#hero">Accueil</a>
+          <a href="#about">À propos</a>
+          <a href="#projects">Projets</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://github.com/Pro0101-2b2fr" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Pro0101-2b2fr. Expert en développement Minecraft. Tous droits réservés.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Loading indicator -->
-  <div id="loading" class="loading" aria-hidden="true">
-    <div class="loading-spinner"></div>
-  </div>
-
-  <!-- Scripts -->
   <script src="assets/js/script.js"></script>
 </body>
 </html>
