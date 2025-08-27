@@ -648,11 +648,11 @@ function createTimelineChart() {
     if (!ctx) return;
 
     const timelineData = {
-        labels: ['Mois 1', 'Mois 2', 'Mois 3', 'Mois 4', 'Mois 5', 'Mois 6'],
+        labels: ['2024', 'Début 2025', 'Mi-2025', 'Fin 2025', 'Mi-2026', 'Fin 2026'],
         datasets: [
             {
-                label: 'Compétences Java',
-                data: [5, 15, 25, 30, 35, 35],
+                label: 'Compétences Java (%)',
+                data: [35, 45, 60, 70, 80, 85],
                 borderColor: '#00f5ff',
                 backgroundColor: 'rgba(0, 245, 255, 0.1)',
                 tension: 0.4,
@@ -660,15 +660,23 @@ function createTimelineChart() {
             },
             {
                 label: 'Projets Réalisés',
-                data: [0, 1, 3, 5, 7, 8],
+                data: [8, 12, 18, 25, 35, 50],
                 borderColor: '#ff6b35',
                 backgroundColor: 'rgba(255, 107, 53, 0.1)',
                 tension: 0.4,
                 fill: false
             },
             {
-                label: 'Lignes de Code (K)',
-                data: [0, 2, 5, 8, 10, 12],
+                label: 'Expérience Pro (mois)',
+                data: [0, 0, 0, 3, 9, 15],
+                borderColor: '#50fa7b',
+                backgroundColor: 'rgba(80, 250, 123, 0.1)',
+                tension: 0.4,
+                fill: false
+            },
+            {
+                label: 'Technologies Maîtrisées',
+                data: [3, 5, 8, 12, 18, 25],
                 borderColor: '#ffd700',
                 backgroundColor: 'rgba(255, 215, 0, 0.1)',
                 tension: 0.4,

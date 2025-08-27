@@ -156,17 +156,19 @@ python3 -m http.server 5000
 
 ## 📈 Prochaines Étapes
 
-### 🔮 Améliorations du Site
+### 🔮 Améliorations du Site (2025)
 - [ ] Mode sombre/clair
 - [ ] Plus de graphiques de progression
 - [ ] Section blog d'apprentissage
 - [ ] Galerie de projets
 
-### 🎯 Apprentissage 2024
-- Approfondir Java
-- Découvrir Spring Framework
-- Apprendre les bases de données
-- Améliorer mon Pro Client
+### 🎯 Objectifs 2026
+- **Java Avancé** : Maîtriser la POO et les collections
+- **Spring Framework** : Découvrir le développement web Java
+- **Bases de données** : MySQL/PostgreSQL et JPA
+- **Pro Client v2** : Version complète avec interface graphique
+- **Premier stage** : Expérience professionnelle en développement
+- **Projets collaboratifs** : Contribuer à des projets open source
 
 ---
 
