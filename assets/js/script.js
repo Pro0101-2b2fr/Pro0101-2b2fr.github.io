@@ -1,4 +1,3 @@
-
 // Variables globales
 let particlesArray = [];
 let animationId;
@@ -14,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSkillBars();
     setupCounters();
     loadGitHubStats();
-    
+
     // Masquer le loading screen plus rapidement
     setTimeout(() => {
         const loadingScreen = document.getElementById('loading-screen');
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Initialisation de l'application
 function initializeApp() {
     console.log('🚀 Pro Client Better - Site initialisé');
-    
+
     // Configuration de performance
     if (typeof requestIdleCallback !== 'undefined') {
         requestIdleCallback(() => {
@@ -44,9 +43,9 @@ function createParticles() {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const particlesContainer = document.getElementById('particles-background');
-    
+
     if (!particlesContainer) return;
-    
+
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     canvas.style.position = 'fixed';
@@ -54,13 +53,13 @@ function createParticles() {
     canvas.style.left = '0';
     canvas.style.zIndex = '-1';
     canvas.style.pointerEvents = 'none';
-    
+
     particlesContainer.appendChild(canvas);
-    
+
     // Créer les particules (réduit pour mobile)
     const isMobile = window.innerWidth < 768;
     const particleCount = isMobile ? 20 : Math.min(50, Math.floor(window.innerWidth / 20));
-    
+
     for (let i = 0; i < particleCount; i++) {
         particlesArray.push({
             x: Math.random() * canvas.width,
@@ -72,44 +71,44 @@ function createParticles() {
             color: Math.random() > 0.5 ? '#00f5ff' : '#ff6b35'
         });
     }
-    
+
     function animateParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         particlesArray.forEach(particle => {
             // Mise à jour de la position
             particle.x += particle.speedX;
             particle.y += particle.speedY;
-            
+
             // Rebond sur les bords
             if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
             if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
-            
+
             // Dessiner la particule
             ctx.beginPath();
             ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
             ctx.fillStyle = particle.color;
             ctx.globalAlpha = particle.opacity;
             ctx.fill();
-            
+
             // Effet de lueur
             ctx.shadowColor = particle.color;
             ctx.shadowBlur = 10;
             ctx.fill();
             ctx.shadowBlur = 0;
         });
-        
+
         // Connexions entre particules proches
         ctx.globalAlpha = 0.1;
         ctx.strokeStyle = '#00f5ff';
         ctx.lineWidth = 1;
-        
+
         for (let i = 0; i < particlesArray.length; i++) {
             for (let j = i + 1; j < particlesArray.length; j++) {
                 const dx = particlesArray[i].x - particlesArray[j].x;
                 const dy = particlesArray[i].y - particlesArray[j].y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                
+
                 if (distance < 100) {
                     ctx.beginPath();
                     ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
@@ -118,12 +117,12 @@ function createParticles() {
                 }
             }
         }
-        
+
         animationId = requestAnimationFrame(animateParticles);
     }
-    
+
     animateParticles();
-    
+
     // Redimensionnement
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
@@ -137,7 +136,7 @@ function setupNavigation() {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     // Effet de scroll sur la navbar
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
@@ -146,13 +145,13 @@ function setupNavigation() {
             navbar.classList.remove('scrolled');
         }
     });
-    
+
     // Menu mobile
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
         });
-        
+
         // Fermer le menu au clic sur un lien
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -160,14 +159,14 @@ function setupNavigation() {
             });
         });
     }
-    
+
     // Smooth scroll
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-            
+
             if (targetSection) {
                 const offsetTop = targetSection.offsetTop - 70;
                 window.scrollTo({
@@ -185,13 +184,13 @@ function setupScrollAnimations() {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
-                
+
                 // Animation spéciale pour les cartes
                 if (entry.target.classList.contains('about-card') || 
                     entry.target.classList.contains('project-card') ||
@@ -201,7 +200,7 @@ function setupScrollAnimations() {
             }
         });
     }, observerOptions);
-    
+
     // Observer les éléments
     const elementsToAnimate = document.querySelectorAll('.about-card, .project-card, .skill-category, .contact-card');
     elementsToAnimate.forEach(el => {
@@ -214,20 +213,20 @@ function setupScrollAnimations() {
 // Animation des barres de compétences
 function setupSkillBars() {
     const skillBars = document.querySelectorAll('.skill-progress');
-    
+
     const skillObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const progressBar = entry.target;
                 const targetWidth = progressBar.getAttribute('data-width');
-                
+
                 setTimeout(() => {
                     progressBar.style.width = targetWidth + '%';
                 }, 200);
             }
         });
     }, { threshold: 0.5 });
-    
+
     skillBars.forEach(bar => {
         skillObserver.observe(bar);
     });
@@ -236,7 +235,7 @@ function setupSkillBars() {
 // Animation des compteurs
 function setupCounters() {
     const counters = document.querySelectorAll('.stat-number');
-    
+
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -245,7 +244,7 @@ function setupCounters() {
                 const duration = 2000;
                 const increment = target / (duration / 16);
                 let current = 0;
-                
+
                 const updateCounter = () => {
                     if (current < target) {
                         current += increment;
@@ -255,12 +254,12 @@ function setupCounters() {
                         counter.textContent = target;
                     }
                 };
-                
+
                 updateCounter();
             }
         });
     }, { threshold: 0.5 });
-    
+
     counters.forEach(counter => {
         counterObserver.observe(counter);
     });
@@ -276,7 +275,7 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
 function createButtonParticles(button) {
     const rect = button.getBoundingClientRect();
     const particles = [];
-    
+
     for (let i = 0; i < 6; i++) {
         const particle = document.createElement('div');
         particle.style.position = 'fixed';
@@ -288,36 +287,36 @@ function createButtonParticles(button) {
         particle.style.zIndex = '1000';
         particle.style.left = (rect.left + rect.width / 2) + 'px';
         particle.style.top = (rect.top + rect.height / 2) + 'px';
-        
+
         document.body.appendChild(particle);
         particles.push(particle);
-        
+
         // Animation
         const angle = (360 / 6) * i;
         const velocity = 2;
         const dx = Math.cos(angle * Math.PI / 180) * velocity;
         const dy = Math.sin(angle * Math.PI / 180) * velocity;
-        
+
         let x = rect.left + rect.width / 2;
         let y = rect.top + rect.height / 2;
         let opacity = 1;
-        
+
         function animateParticle() {
             x += dx;
             y += dy;
             opacity -= 0.02;
-            
+
             particle.style.left = x + 'px';
             particle.style.top = y + 'px';
             particle.style.opacity = opacity;
-            
+
             if (opacity > 0) {
                 requestAnimationFrame(animateParticle);
             } else {
                 particle.remove();
             }
         }
-        
+
         animateParticle();
     }
 }
@@ -351,7 +350,7 @@ document.addEventListener('keydown', (e) => {
 function activateEasterEgg() {
     // Mode Matrix
     document.body.style.filter = 'hue-rotate(120deg)';
-    
+
     // Message secret
     const message = document.createElement('div');
     message.innerHTML = '🎮 Pro Client Better - Mode développeur activé! 🚀';
@@ -368,9 +367,9 @@ function activateEasterEgg() {
     message.style.fontSize = '1.2rem';
     message.style.textAlign = 'center';
     message.style.animation = 'glow 1s ease-in-out infinite alternate';
-    
+
     document.body.appendChild(message);
-    
+
     setTimeout(() => {
         message.remove();
         document.body.style.filter = 'none';
@@ -387,27 +386,27 @@ window.addEventListener('beforeunload', () => {
 // Récupération des statistiques GitHub réelles
 async function loadGitHubStats() {
     const username = 'Pro0101-2b2fr';
-    
+
     try {
         // Récupérer les informations du profil
         const userResponse = await fetch(`https://api.github.com/users/${username}`);
         const userData = await userResponse.json();
-        
+
         // Récupérer les repositories
         const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
         const reposData = await reposResponse.json();
-        
+
         // Calculer les statistiques
         const stats = calculateGitHubStats(userData, reposData);
-        
+
         // Mettre à jour l'affichage
         updateStatsDisplay(stats);
-        
+
         // Créer les graphiques
         createCharts(stats, reposData);
-        
+
         console.log('📊 Statistiques GitHub chargées:', stats);
-        
+
     } catch (error) {
         console.warn('⚠️ Impossible de charger les stats GitHub:', error);
         // Créer des graphiques avec données par défaut
@@ -419,24 +418,24 @@ function calculateGitHubStats(userData, reposData) {
     // Calculer le total de lignes de code (estimation basée sur les langages)
     let totalLines = 0;
     let javaRepos = 0;
-    
+
     reposData.forEach(repo => {
         // Estimation approximative des lignes de code par repo
         if (repo.size > 0) {
             totalLines += repo.size * 10; // Approximation: 1KB = ~10 lignes
         }
-        
+
         // Compter les repos Java
         if (repo.language === 'Java') {
             javaRepos++;
         }
     });
-    
+
     // Calculer les mois depuis la création du compte
     const accountCreated = new Date(userData.created_at);
     const now = new Date();
     const monthsSinceCreation = Math.floor((now - accountCreated) / (1000 * 60 * 60 * 24 * 30));
-    
+
     return {
         monthsLearning: Math.max(6, monthsSinceCreation), // Minimum 6 mois comme indiqué
         linesOfCode: Math.floor(totalLines / 1000), // En milliers
@@ -450,18 +449,18 @@ function calculateGitHubStats(userData, reposData) {
 function updateStatsDisplay(stats) {
     // Mettre à jour les compteurs avec les vraies données
     const statNumbers = document.querySelectorAll('.stat-number');
-    
+
     if (statNumbers.length >= 3) {
         // Mois d'apprentissage
         statNumbers[0].setAttribute('data-target', stats.monthsLearning);
-        
+
         // Lignes de code (en K)
         statNumbers[1].setAttribute('data-target', Math.max(10, stats.linesOfCode));
-        
+
         // Nombre de projets
         statNumbers[2].setAttribute('data-target', Math.max(8, stats.projects));
     }
-    
+
     // Redéclencher l'animation des compteurs
     setTimeout(() => {
         setupCounters();
@@ -493,7 +492,7 @@ function createDefaultCharts() {
 function createSkillsChart() {
     const ctx = document.getElementById('skillsChart');
     if (!ctx) return;
-    
+
     new Chart(ctx, {
         type: 'doughnut',
         data: {
@@ -533,11 +532,11 @@ function createSkillsChart() {
 function createActivityChart(stats) {
     const ctx = document.getElementById('activityChart');
     if (!ctx) return;
-    
+
     // Données simulées d'activité
     const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'];
     const commits = [0, 5, 12, 18, 25, 35];
-    
+
     new Chart(ctx, {
         type: 'line',
         data: {
@@ -590,12 +589,12 @@ function createActivityChart(stats) {
 function createProjectsChart(reposData) {
     const ctx = document.getElementById('projectsChart');
     if (!ctx) return;
-    
+
     // Analyser les langages des repos ou utiliser des données par défaut
     const languages = reposData.length > 0 
         ? analyzeLanguages(reposData) 
         : { Java: 3, HTML: 2, JavaScript: 2, Autres: 1 };
-    
+
     new Chart(ctx, {
         type: 'polarArea',
         data: {
@@ -647,7 +646,7 @@ function createProjectsChart(reposData) {
 function createTimelineChart() {
     const ctx = document.getElementById('timelineChart');
     if (!ctx) return;
-    
+
     const timelineData = {
         labels: ['Mois 1', 'Mois 2', 'Mois 3', 'Mois 4', 'Mois 5', 'Mois 6'],
         datasets: [
@@ -677,7 +676,7 @@ function createTimelineChart() {
             }
         ]
     };
-    
+
     new Chart(ctx, {
         type: 'line',
         data: timelineData,
@@ -727,12 +726,12 @@ function analyzeLanguages(reposData) {
             languages[repo.language] = (languages[repo.language] || 0) + 1;
         }
     });
-    
+
     // Limiter aux 4 langages les plus utilisés
     const sortedLanguages = Object.entries(languages)
         .sort(([,a], [,b]) => b - a)
         .slice(0, 4);
-    
+
     return Object.fromEntries(sortedLanguages);
 }
 
